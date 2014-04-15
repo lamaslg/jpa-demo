@@ -6,8 +6,8 @@
 
 package com.luis.servlets;
 
-import com.luis.persistencia.Empleado;
 import com.luis.persistencia.controller.EmpleadoJpaController;
+import com.luis.persistencia.controller.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author luis
  */
-public class Alta extends HttpServlet {
+public class ServletBorrar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,34 +36,35 @@ public class Alta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String nombre = request.getParameter("txNom");
-        double salario = 0;
+      
+        Integer id=0;
         
         try {
-            salario = Double.parseDouble(request.getParameter("txSal"));
+            id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException numberFormatException) {
         }
         
-        Empleado emp=new Empleado();
-        emp.setNombre(nombre);
-        emp.setSalario(salario);
+        
         
          EntityManagerFactory em=
                 Persistence.createEntityManagerFactory("EmpleadosJPAPU");
        
-        EmpleadoJpaController cont=new EmpleadoJpaController(em);
+         EmpleadoJpaController cont=new EmpleadoJpaController(em);
         
         try {
-            cont.create(emp);
+            cont.destroy(id);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(ServletBorrar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletBorrar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         
         response.sendRedirect("index.html");
         
-    }
+        
+        
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

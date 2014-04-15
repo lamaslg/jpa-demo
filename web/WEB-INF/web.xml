@@ -8,6 +8,14 @@
         <servlet-name>Alta</servlet-name>
         <servlet-class>com.luis.servlets.Alta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletBorrar</servlet-name>
+        <servlet-class>com.luis.servlets.ServletBorrar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletRunModificar</servlet-name>
+        <servlet-class>com.luis.servlets.ServletRunModificar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Listado</servlet-name>
         <url-pattern>/listado.html</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>Alta</servlet-name>
         <url-pattern>/alta.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBorrar</servlet-name>
+        <url-pattern>/borrar.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRunModificar</servlet-name>
+        <url-pattern>/runModificar.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -13,10 +14,44 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <table>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Salario
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
         <c:forEach items="${emp}" var="emple" >
+            <tr>
+                
+                <td>
+                   ${emple.nombre} 
+                </td>
+                <td>
+                    <fmt:formatNumber value="${emple.salario}" type="currency" />
+                </td>
+                <td>
+                    
+                    <a href="borrar.html?id=${emple.idEmpleado}">Borrar</a>
+                    
+                    <a href="modificar.html?id=${emple.idEmpleado}">Modificar</a>
+                </td>
+                
+            </tr>
             
-            Nombre: ${emple.nombre}
-        </c:forEach>  
+            
+         
+        </c:forEach>    
+        </table>
+        
+        
+          
             
     </body>
 </html>
