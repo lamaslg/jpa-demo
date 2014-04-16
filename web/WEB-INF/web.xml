@@ -16,6 +16,10 @@
         <servlet-name>ServletRunModificar</servlet-name>
         <servlet-class>com.luis.servlets.ServletRunModificar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletComboPuestos</servlet-name>
+        <servlet-class>com.luis.servlets.ServletComboPuestos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Listado</servlet-name>
         <url-pattern>/listado.html</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ServletRunModificar</servlet-name>
         <url-pattern>/runModificar.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletComboPuestos</servlet-name>
+        <url-pattern>/ServletComboPuestos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

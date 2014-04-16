@@ -6,16 +6,15 @@
 
 package com.luis.servlets;
 
-import com.luis.persistencia.Empleado;
 import com.luis.persistencia.Puesto;
 import com.luis.persistencia.controller.EmpleadoJpaController;
 import com.luis.persistencia.controller.PuestoJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author luis
  */
-public class Alta extends HttpServlet {
+public class ServletComboPuestos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,37 +37,22 @@ public class Alta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String nombre = request.getParameter("txNom");
-        double salario = 0;
-        int idPuesto=0;
-        try {
-            salario = Double.parseDouble(request.getParameter("txSal"));
-            idPuesto=Integer.parseInt(request.getParameter("puesto"));
-        } catch (NumberFormatException numberFormatException) {
-        }
-        
-        Empleado emp=new Empleado();
-        emp.setNombre(nombre);
-        emp.setSalario(salario);
        
          EntityManagerFactory em=
                 Persistence.createEntityManagerFactory("EmpleadosJPAPU");
-        PuestoJpaController pcont=new PuestoJpaController(null, em);
-        Puesto p=pcont.findPuesto(idPuesto);
-        
-        emp.setIdPuesto(p);
-        
-        EmpleadoJpaController cont=new EmpleadoJpaController(em);
-        
-        try {
-            cont.create(emp);
-        } catch (Exception ex) {
-            Logger.getLogger(Alta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+        PuestoJpaController cont=new PuestoJpaController(null,em);
         
         
-        response.sendRedirect("index.html");
+        List<Puesto> puestos=cont.findPuestoEntities();
+        
+        request.setAttribute("puestos", puestos);
+        
+        RequestDispatcher dsp=getServletContext().
+                getRequestDispatcher("/combopuestos.jsp");
+        
+        dsp.forward(request, response);
+        
         
     }
 

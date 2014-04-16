@@ -4,6 +4,7 @@
     Author     : luis
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,8 @@
             <br>
             Salario: <input type="text" name="txSal">
             <br>
-            
+            <c:import url="/ServletComboPuestos"></c:import>
+            <br>
             <input type="submit" value="enviar">
             
         </form>

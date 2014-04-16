@@ -24,6 +24,9 @@
                     Salario
                 </th>
                 <th>
+                    Puesto
+                </th>
+                <th>
                     Acciones
                 </th>
             </tr>
@@ -35,6 +38,10 @@
                 </td>
                 <td>
                     <fmt:formatNumber value="${emple.salario}" type="currency" />
+                </td>
+                <td>
+                    ${emple.idPuesto.nombre}
+                    
                 </td>
                 <td>
                     
